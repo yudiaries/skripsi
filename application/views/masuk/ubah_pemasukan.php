@@ -1,5 +1,5 @@
 
-<p><a href="<?=base_url('p/masuk');?>"><button type="button" class="btn btn-primary">Kembali ke Daftar Pemasukan</button></a></p>
+<p><a href="<?=base_url('masuk');?>"><button type="button" class="btn btn-primary">Kembali ke Daftar Pemasukan</button></a></p>
 <h4>Ubah Pemasukan</h4>
 <?php if ($this->session->flashdata('message')) { ?>
 	<div class="alert alert-dismissible alert-danger">

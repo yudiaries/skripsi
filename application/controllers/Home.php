@@ -7,7 +7,7 @@ class Home extends CI_Controller {
     	parent::__construct();
     	$this->load->model('M_index');
     }
-	
+
 	public function index()
 	{
 		if ($this->session->userdata('username')) {
@@ -27,7 +27,7 @@ class Home extends CI_Controller {
 		}else{
 			$username 	= $this->input->post('username');
 			$password 	= md5($this->input->post('password'));
-			$result 	= $this->Kas_model->login($username,$password);
+			$result 	= $this->M_index->login($username,$password);
 			if ($result){
 				$sess = array(
 				    'username'  => $result[0]['username'],
@@ -57,8 +57,8 @@ class Home extends CI_Controller {
 	function cari()
 	{
 		if ($this->session->userdata('username')) {
-			$key= $this->input->get('s'); 
-	        $page=$this->input->get('per_page');  
+			$key= $this->input->get('s');
+	        $page=$this->input->get('per_page');
 	        $cari=array(
 	            'nomor' => $key,
 	            'keterangan' => $key,
@@ -73,7 +73,7 @@ class Home extends CI_Controller {
 				$offset = $page;
 			}
 			$this->load->model('M_index');
-			$total = $this->Kas_model->row_cari($cari);
+			$total = $this->M_index->row_cari($cari);
 			$config['page_query_string'] = TRUE;
 			$config['base_url'] = base_url().'p/cari?s='.$key;
 			$config['total_rows'] = $total;
@@ -96,7 +96,7 @@ class Home extends CI_Controller {
 			$this->pagination->initialize($config);
 			$data['cari'] = $key;
 			$data['halaman'] = $this->pagination->create_links();
-			$data['result'] = $this->Kas_model->cari($batas, $offset, $cari);
+			$data['result'] = $this->M_index->cari($batas, $offset, $cari);
 			$this->load->view('template/header');
 			$this->load->view('template/navbar');
 			$this->load->view('cari',$data);

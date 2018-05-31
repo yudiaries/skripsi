@@ -35,11 +35,11 @@ class Keluar extends CI_Controller {
 			$data = array(
 				'halaman' 	=> $this->pagination->create_links(),
 				'result' 	=> $this->M_keluar->keluar($config['per_page'], $from),
-				'ttl' 		=> $this->M_keluar->total_keluar() 
+				'ttl' 		=> $this->M_keluar->total_keluar()
 			);
 			$this->load->view('template/header');
 			$this->load->view('template/navbar');
-			$this->load->view('keluar',$data);
+			$this->load->view('keluar/keluar',$data);
 			$this->load->view('template/footer');
 		}else{
 			redirect(base_url());
@@ -50,15 +50,15 @@ class Keluar extends CI_Controller {
 	{
 		if ($this->session->userdata('username')) {
 			$result = $this->M_keluar->nomor();
-			if (empty($result[0]['nomor'])){ 
-				$no = date('Ymd')."000001"; 
-			} else { 
-				$no = $result[0]['nomor']+1; 
+			if (empty($result[0]['nomor'])){
+				$no = date('Ymd')."000001";
+			} else {
+				$no = $result[0]['nomor']+1;
 			}
 			$data['nomor'] = $no;
 			$this->load->view('template/header');
 			$this->load->view('template/navbar');
-			$this->load->view('pengeluaran',$data);
+			$this->load->view('keluar/pengeluaran',$data);
 			$this->load->view('template/footer');
 		}else{
 			redirect(base_url());
@@ -100,7 +100,7 @@ class Keluar extends CI_Controller {
 			);
 			$this->load->view('template/header');
 			$this->load->view('template/navbar');
-			$this->load->view('ubah_pengeluaran', $data);
+			$this->load->view('keluar/ubah_pengeluaran', $data);
 			$this->load->view('template/footer');
 		}else{
 			redirect(base_url());

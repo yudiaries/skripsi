@@ -14,7 +14,7 @@ class Laporan extends CI_Controller {
 		if ($this->session->userdata('username')) {
 			$this->load->view('template/header');
 			$this->load->view('template/navbar');
-			$this->load->view('laporan');
+			$this->load->view('laporan/laporan');
 			$this->load->view('template/footer');
 		}else{
 			redirect(base_url());
@@ -23,7 +23,7 @@ class Laporan extends CI_Controller {
 
 	function laporan_harian()
 	{
-		if ($this->session->userdata('username')) {	
+		if ($this->session->userdata('username')) {
 			if (!$this->uri->segment(3)){
 				$cek = $this->input->post('tanggal');
 			}else{
@@ -60,7 +60,7 @@ class Laporan extends CI_Controller {
 			);
 			$this->load->view('template/header');
 			$this->load->view('template/navbar');
-			$this->load->view('laporan_harian',$data);
+			$this->load->view('laporan/laporan_harian',$data);
 			$this->load->view('template/footer');
 		}else{
 			redirect(base_url());
@@ -109,7 +109,7 @@ class Laporan extends CI_Controller {
 			);
 			$this->load->view('template/header');
 			$this->load->view('template/navbar');
-			$this->load->view('laporan_periode',$data);
+			$this->load->view('laporan/laporan_periode',$data);
 			$this->load->view('template/footer');
 		}else{
 			redirect(base_url());

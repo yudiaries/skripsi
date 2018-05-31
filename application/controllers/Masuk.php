@@ -6,7 +6,7 @@ class Masuk extends CI_Controller {
     {
     	parent::__construct();
     	$this->load->model('M_masuk');
-    	$this->load->model('M_index');	
+    	$this->load->model('M_index');
     }
     function index()
 	{
@@ -32,13 +32,13 @@ class Masuk extends CI_Controller {
 			$this->pagination->initialize($config);
 			$from = $this->uri->segment(3);
 			$data = array(
-				'halaman' 	=> $this->pagination->create_links(), 
+				'halaman' 	=> $this->pagination->create_links(),
 				'result' 	=> $this->M_masuk->masuk($config['per_page'], $from),
 				'ttl' 		=> $this->M_masuk->total_masuk()
 			);
 			$this->load->view('template/header');
 			$this->load->view('template/navbar');
-			$this->load->view('masuk',$data);
+			$this->load->view('masuk/masuk',$data);
 			$this->load->view('template/footer');
 		}else{
 			redirect(base_url());
@@ -49,15 +49,15 @@ class Masuk extends CI_Controller {
 	{
 		if ($this->session->userdata('username')) {
 			$result = $this->M_masuk->nomor();
-			if (empty($result[0]['nomor'])){ 
-				$no = date('Ymd')."000001"; 
-			} else { 
-				$no = $result[0]['nomor']+1; 
+			if (empty($result[0]['nomor'])){
+				$no = "HL".date('Ymd')."000001";
+			} else {
+				$no = $result[0]['nomor']+1;
 			}
 			$data['nomor'] = $no;
 			$this->load->view('template/header');
 			$this->load->view('template/navbar');
-			$this->load->view('pemasukan',$data);
+			$this->load->view('masuk/pemasukan',$data);
 			$this->load->view('template/footer');
 		}else{
 			redirect(base_url());
@@ -99,7 +99,7 @@ class Masuk extends CI_Controller {
 			);
 			$this->load->view('template/header');
 			$this->load->view('template/navbar');
-			$this->load->view('ubah_pemasukan', $data);
+			$this->load->view('masuk/ubah_pemasukan', $data);
 			$this->load->view('template/footer');
 		}else{
 			redirect(base_url());
