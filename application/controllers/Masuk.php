@@ -14,7 +14,7 @@ class Masuk extends CI_Controller {
 			$total = $this->M_masuk->row_masuk();
 			$config['base_url'] 		= base_url().'masuk';
 			$config['total_rows'] 		= $total;
-			$config['per_page'] 		= 5;
+			$config['per_page'] 		= 10;
 	        $config['full_tag_open']    = '<div><ul class="pagination">';
 	        $config['full_tag_close']   = '</ul></div>';
         	$config['first_link']       = '<li class="page-item page-link">Awal</li>';

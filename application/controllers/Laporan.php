@@ -8,6 +8,8 @@ class Laporan extends CI_Controller {
     	$this->load->model('M_index');
     	$this->load->model('M_masuk');
     	$this->load->model('M_keluar');
+			$this->load->model('M_hutang');
+			$this->load->model('M_piutang');
     }
     function index()
 	{
@@ -34,7 +36,7 @@ class Laporan extends CI_Controller {
 			$total = $this->M_index->row_harian($tgldb);
 			$config['base_url'] 		= base_url().'laporan/laporan_harian/'.$tgl_uri;
 			$config['total_rows'] 		= $total;
-			$config['per_page'] 		= 5;
+			$config['per_page'] 		= 10;
 	        $config['full_tag_open']    = '<div><ul class="pagination">';
 	        $config['full_tag_close']   = '</ul></div>';
         	$config['first_link']       = '<li class="page-item page-link">Awal</li>';
@@ -55,6 +57,8 @@ class Laporan extends CI_Controller {
 				'tanggal' 		=> $tgldb,
 				'ttl_masuk'		=> $this->M_masuk->total_harian_masuk($tgldb),
 				'ttl_keluar'	=> $this->M_keluar->total_harian_keluar($tgldb),
+				'ttl_hutang'	=> $this->M_hutang->total_harian_hutang($tgldb),
+				'ttl_piutang'	=> $this->M_piutang->total_harian_piutang($tgldb),
 				'halaman' 		=> $this->pagination->create_links(),
 				'result' 		=> $this->M_index->laporan_harian($tgldb,$config['per_page'], $from)
 			);
@@ -82,7 +86,7 @@ class Laporan extends CI_Controller {
 			$total = $this->M_index->row_periode($tgl_mulai_db, $tgl_sampai_db);
 			$config['base_url'] 		= base_url().'laporan/laporan_periode/'.$tgl_mulai.'/'.$tgl_sampai;
 			$config['total_rows'] 		= $total;
-			$config['per_page'] 		= 5;
+			$config['per_page'] 		= 10;
 	        $config['full_tag_open']    = '<div><ul class="pagination">';
 	        $config['full_tag_close']   = '</ul></div>';
         	$config['first_link']       = '<li class="page-item page-link">Awal</li>';
@@ -104,6 +108,8 @@ class Laporan extends CI_Controller {
 				'tgl_sampai'	=> $tgl_sampai_db,
 				'ttl_masuk'		=> $this->M_masuk->total_periode_masuk($tgl_mulai,$tgl_sampai),
 				'ttl_keluar'	=> $this->M_keluar->total_periode_keluar($tgl_mulai,$tgl_sampai),
+				'ttl_hutang'	=> $this->M_hutang->total_periode_hutang($tgl_mulai,$tgl_sampai),
+				'total_piutang'	=> $this->M_piutang->total_periode_piutang($tgl_mulai,$tgl_sampai),
 				'halaman' 		=> $this->pagination->create_links(),
 				'result' 		=> $this->M_index->laporan_periode($tgl_mulai_db, $tgl_sampai_db, $config['per_page'], $from)
 			);

@@ -89,7 +89,7 @@ class M_index extends CI_Model {
         }
         $this->db->order_by('nomor DESC');
         $query = $this->db->get();
-     
+
         if ($query->num_rows() > 0) {
             return $query->result();
         }
