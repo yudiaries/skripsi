@@ -62,22 +62,9 @@
 					$jumlah_keluar += $total_keluar->jumlah;
 				}
 				$jumlah = $jumlah_masuk-$jumlah_keluar;
-
-				foreach ($ttl_hutang as $total_hutang) {
-					$jumlah_hutang += $total_hutang->jumlah;
-				}
-				foreach ($ttl_piutang as $total_piutang) {
-					$jumlah_piutang += $total_piutang->jumlah;
-				}
-				$jumlah = $jumlah_piutang+$jumlah_hutang;
 			?>
 				<tr>
 					<th colspan="3" scope="col">TOTAL <small>(Pemasukan dan Pengeluaran Tanggal <?=date('d/m/Y', strtotime($data->tanggal));?>)</small></th>
-					<th scope="col">Rp. <?=number_format($jumlah,2,',','.');?></th>
-					<th colspan="2" scope="col">&nbsp;</th>
-				</tr>
-				<tr>
-					<th colspan="3" scope="col">TOTAL <small>(Hutang dan Piutang Tanggal <?=date('d/m/Y', strtotime($data->tanggal));?>)</small></th>
 					<th scope="col">Rp. <?=number_format($jumlah,2,',','.');?></th>
 					<th colspan="2" scope="col">&nbsp;</th>
 				</tr>
